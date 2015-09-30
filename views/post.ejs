@@ -1,0 +1,31 @@
+<%- include _head %>
+<%- include _navigation %>
+<div class="block-body column three-fourths">
+  <article class="clearfix">
+    <form>
+      <header>
+        <h2>
+          <input type="text" placeholder="中文标题"/>
+          <input type="text" placeholder="路由地址"/>
+        </h2>
+      </header>
+      <div class="article-meta clearfix">
+        <time class="left">
+          <input type="text" placeholder="日期(yyyy-MM-dd hh:mm:ss)"/>
+        </time>
+        <ul class="tags left"></ul>
+        <input type="text" class="right">
+        <select class="right">
+          <option>新增</option>
+          <option>javascript</option>
+          <option>css</option>
+        </select>
+      </div>
+      <div class="markdown-body">
+        <div class="textarea" contenteditable="true"></div>
+      </div>
+      <button type="submit" class="right">发布</button>
+    </form>
+  </article>
+</div>
+<%- include _sidebar %>
