@@ -504,20 +504,20 @@ body.login .bg-bubbles li:nth-child(10){
 /******login end******/
 
 /********post start********/
-body.post input,
-body.post select{
+.post input,
+.post select{
   height:100%;
   line-height: 100%;
 }
 
-body.post input,
-body.post .textarea,
-body.post select{
+.post input,
+.post .textarea,
+.post select{
   border:1px solid #E7E7E7;
   border-radius: 4px;
 }
 
-body.post .textarea{
+.post .textarea{
   width:100%;
   min-height:500px;
   background:#787878;
@@ -525,7 +525,7 @@ body.post .textarea{
   outline:0;
 }
 
-body.post button{
+.post button{
   width: 250px;
   height:50px;
   border-radius: 4px;

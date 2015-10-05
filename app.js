@@ -12,6 +12,7 @@ var settings = require('./settings/settings');
 var list_routes = require('./routes/list');
 var article_routes = require('./routes/article');
 var login_routes = require('./routes/login');
+var post_routes = require('./routes/post');
 
 var app = express();
 app.set('views',path.join(__dirname,'views'));
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, '/assets')));
 list_routes(app);
 article_routes(app);
 login_routes(app);
+post_routes(app);
 
 
 module.exports = app;
