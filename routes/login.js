@@ -5,7 +5,17 @@ var User = require('../models/user.js');
 module.exports = function(app){
   app.get('/login',function(req,res){
     if(req.sessionID){
-      res.render('login');
+      //res.render('login');
+      var user = new User({
+        sessionID:req.sessionID
+      });
+      user.checkLogin(function(err,usercookieinfo){
+        if(usercookieinfo){
+          res.redirect('back');
+        }else{
+          res.render('login');
+        }
+      });
     }else{
       res.end();
     }

@@ -56,13 +56,13 @@ User.prototype.checkLogin = function(callback){
 
   MongoClient.connect(settings.mongoUrl,function(err,db){
       var collection = db.collection('usercookie');
-      collection.findOne({sessionID:user.sessionID},function(err,result){
-        if((!err)&&result){
-          callback&&callback(true);
-        }else{
-          callback&&callback(false);
-        }
+      collection.findOne({sessionID:user.sessionID},function(err,usercookieinfo){
         db.close();
+        if((!err)&&usercookieinfo){
+          callback(null,usercookieinfo);
+        }else{
+          callback&&callback(err);
+        }
       });
   });
 };

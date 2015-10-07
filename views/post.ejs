@@ -2,27 +2,24 @@
 <%- include _navigation %>
 <div class="post block-body column three-fourths">
   <article class="clearfix">
-    <form>
+    <form method="post">
       <header>
         <h2>
-          <input type="text" placeholder="中文标题"/>
-          <input type="text" placeholder="路由地址"/>
+          <input type="text" placeholder="中文标题" name="title" value="测试标题"/>
+          <input type="text" placeholder="路由地址" name="name" value="testroute"/>
         </h2>
       </header>
       <div class="article-meta clearfix">
         <time class="left">
-          <input type="text" placeholder="日期(yyyy-MM-dd hh:mm:ss)"/>
+          <input type="text" placeholder="日期(yyyy/MM/dd hh:mm:ss)" name="date" value="2015/10/07 19:15:12"/>
         </time>
         <ul class="tags left"></ul>
-        <input type="text" class="right">
-        <select class="right">
-          <option>新增</option>
-          <option>javascript</option>
-          <option>css</option>
-        </select>
+        <input type="text" class="right" name="tags" value="tag1,tag2,tag3">
+
       </div>
       <div class="markdown-body">
-        <div class="textarea" contenteditable="true"></div>
+        <!-- <div class="textarea" contenteditable="true" name="post"></div> -->
+        <textarea name="post">测试内容#水电费</textarea>
       </div>
       <button type="submit" class="right">发布</button>
     </form>

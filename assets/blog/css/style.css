@@ -512,12 +512,14 @@ body.login .bg-bubbles li:nth-child(10){
 
 .post input,
 .post .textarea,
+.post textarea,
 .post select{
   border:1px solid #E7E7E7;
   border-radius: 4px;
 }
 
-.post .textarea{
+.post .textarea,
+.post textarea{
   width:100%;
   min-height:500px;
   background:#787878;

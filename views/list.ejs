@@ -1,111 +1,32 @@
 <%- include _head %>
 <%- include _navigation %>
 <div class="block-body column three-fourths">
-  <article>
-    <header>
-      <h2>
-        <a href="/">这是文章标题1</a>
-      </h2>
-    </header>
-    <div class="article-meta clearfix">
-      <time class="left">2015年9月29日</time>
-      <ul class="tags left"></ul>
-      <ul class="tags right">
-        <li>
-          <a href="/">生活记录1</a>
-        </li>
-        <li>
-          <a href="/">生活记录2</a>
-        </li>
-      </ul>
-    </div>
-    <div class="markdown-body">
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-    </div>
-  </article>
-  <article>
-    <header>
-      <h2>
-        <a href="/">这是文章标题1</a>
-      </h2>
-    </header>
-    <div class="article-meta clearfix">
-      <time class="left">2015年9月29日</time>
-      <ul class="tags left"></ul>
-      <ul class="tags right">
-        <li>
-          <a href="/">生活记录1</a>
-        </li>
-        <li>
-          <a href="/">生活记录2</a>
-        </li>
-      </ul>
-    </div>
-    <div class="markdown-body">
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-    </div>
-  </article>
-  <article>
-    <header>
-      <h2>
-        <a href="/">这是文章标题1</a>
-      </h2>
-    </header>
-    <div class="article-meta clearfix">
-      <time class="left">2015年9月29日</time>
-      <ul class="tags left"></ul>
-      <ul class="tags right">
-        <li>
-          <a href="/">生活记录1</a>
-        </li>
-        <li>
-          <a href="/">生活记录2</a>
-        </li>
-      </ul>
-    </div>
-    <div class="markdown-body">
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-    </div>
-  </article>
+  <% if(typeof list !='undefined'){ %>
+    <% for(var i=0;i<list.length;i++){ %>
+      <article>
+        <header>
+          <h2>
+            <a href="/"><%= list[i].title %></a>
+          </h2>
+        </header>
+        <div class="article-meta clearfix">
+          <time class="left"><%= list[i].timeStr %></time>
+          <ul class="tags left"></ul>
+          <ul class="tags right">
+            <% for(var j=0;j<list[i].tagsArray.length;j++){ %>
+              <li>
+                <a href="/"><%= list[i].tagsArray[j] %></a>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="markdown-body">
+          <%= list[i].post %>
+        </div>
+      </article>
+    <% } %>
+  <% } %>
+
   <div class="archive-pagination">
     <div class="paginator">
       <span class="page-number current">1</span>
