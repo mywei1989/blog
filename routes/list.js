@@ -62,16 +62,17 @@ module.exports = function(app){
     }
   });
 
-  app.get('/page/:pageIndex',function(req,res,next){
+  app.get('/page',function(req,res,next){
+    res.redirect('/page/1');
+  });
+  app.get('/page/*',function(req,res,next){
     if(req.sessionID){
-      var pageIndex = req.params.pageIndex||1;
-      console.log(pageIndex);
+      var pageIndex = req.params[0]||1;
       var list = new List(
         pageIndex,
         settings.pageSize,
         {}
       );
-
       async.parallel({
         getPageCount:function(done){
           list.getCount(function(err,count){
@@ -88,6 +89,9 @@ module.exports = function(app){
               res.render('list');
             }
           });
+        },
+        getArchive:function(done){
+          done(null);
         }
       },function(asyncErr,asyncResult){
         if(!asyncErr){
@@ -99,7 +103,6 @@ module.exports = function(app){
             }
           });
         }else{
-          //404
           res.end();
         }
       });
