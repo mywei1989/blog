@@ -13,6 +13,7 @@ List.prototype.getList = function(callback){
     collection.find({})
       .skip(1)
       .limit(10000)
+      .sort({time:-1})
       .toArray(function(err,docs){
         if(err){
           return callback&&callback(err);

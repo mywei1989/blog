@@ -14,7 +14,11 @@ module.exports = function(app){
         if(!(err)&&docs){
 
           res.render('list',{
-            list:formatList(docs)
+            list:formatList(docs),
+            pagination:{
+              pageIndex:30,
+              pageCount:62
+            }
           });
         }else{
           res.render('list');
