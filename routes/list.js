@@ -1,31 +1,111 @@
+var async = require('async');
+var settings = require('../settings/settings.js');
 var List = require('../models/list.js');
 
 
 module.exports = function(app){
   app.get('/',function(req,res,next){
     if(req.sessionID){
-      //res.render('list');
       var list = new List(
         1,
-        10,
-        ''
+        settings.pageSize,
+        {}
       );
-      list.getList(function(err,docs){
-        if(!(err)&&docs){
 
+      async.parallel({
+        getPageCount:function(done){
+          list.getCount(function(err,count){
+            if(!(err)&&(count!=0)){
+              done(null,Math.ceil(count/settings.pageSize));
+            }
+          });
+        },
+        getList:function(done){
+          list.getList(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }else{
+              res.render('list');
+            }
+          });
+        }
+      },function(asyncErr,asyncResult){
+        if(!asyncErr){
+          res.render('list',{
+            list:formatList(asyncResult.getList),
+            pagination:{
+              pageIndex:1,
+              pageCount:asyncResult.getPageCount
+            }
+          });
+        }else{
+          //404
+          res.end();
+        }
+      });
+
+
+      /*list.getList(function(err,docs){
+        if(!(err)&&docs){
+          console.log(docs.length);
           res.render('list',{
             list:formatList(docs),
             pagination:{
-              pageIndex:30,
-              pageCount:62
+              pageIndex:59,
+              pageCount:docs.length%3
             }
           });
         }else{
           res.render('list');
         }
+      });*/
+    }
+  });
+
+  app.get('/page/:pageIndex',function(req,res,next){
+    if(req.sessionID){
+      var pageIndex = req.params.pageIndex||1;
+      console.log(pageIndex);
+      var list = new List(
+        pageIndex,
+        settings.pageSize,
+        {}
+      );
+
+      async.parallel({
+        getPageCount:function(done){
+          list.getCount(function(err,count){
+            if(!(err)&&(count!=0)){
+              done(null,Math.ceil(count/settings.pageSize));
+            }
+          });
+        },
+        getList:function(done){
+          list.getList(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }else{
+              res.render('list');
+            }
+          });
+        }
+      },function(asyncErr,asyncResult){
+        if(!asyncErr){
+          res.render('list',{
+            list:formatList(asyncResult.getList),
+            pagination:{
+              pageIndex:parseInt(pageIndex),
+              pageCount:parseInt(asyncResult.getPageCount)
+            }
+          });
+        }else{
+          //404
+          res.end();
+        }
       });
     }
   });
+
 
   function formatList(docs){
     for(var i=0;i<docs.length;i++){
@@ -36,7 +116,8 @@ module.exports = function(app){
         docs[i].tagsArray.push(tags[j]);
       }
     }
-    console.log(docs);
+    //console.log(docs);
     return docs;
   }
+
 };
