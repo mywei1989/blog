@@ -1,5 +1,6 @@
 var async = require('async');
 var settings = require('../settings/settings.js');
+var Post = require('../models/post.js');
 var List = require('../models/list.js');
 
 
@@ -11,8 +12,24 @@ module.exports = function(app){
         settings.pageSize,
         {}
       );
-
       async.parallel({
+        getAllTag:function(done){
+          var post = new Post();
+          post.getAllTag(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }
+          });
+        },
+        getArchive:function(done){
+          list.getArchive(function(err,docs){
+            /*console.log(docs);
+            if(!(err)&&docs){
+              done(null,docs);
+            }*/
+            done(null,docs);
+          });
+        },
         getPageCount:function(done){
           list.getCount(function(err,count){
             if(!(err)&&(count!=0)){
@@ -33,6 +50,7 @@ module.exports = function(app){
         if(!asyncErr){
           res.render('list',{
             list:formatList(asyncResult.getList),
+            tags:asyncResult.getAllTag,
             pagination:{
               pageIndex:1,
               pageCount:asyncResult.getPageCount
@@ -43,22 +61,6 @@ module.exports = function(app){
           res.end();
         }
       });
-
-
-      /*list.getList(function(err,docs){
-        if(!(err)&&docs){
-          console.log(docs.length);
-          res.render('list',{
-            list:formatList(docs),
-            pagination:{
-              pageIndex:59,
-              pageCount:docs.length%3
-            }
-          });
-        }else{
-          res.render('list');
-        }
-      });*/
     }
   });
 
@@ -74,6 +76,14 @@ module.exports = function(app){
         {}
       );
       async.parallel({
+        getAllTag:function(done){
+          var post = new Post();
+          post.getAllTag(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }
+          });
+        },
         getPageCount:function(done){
           list.getCount(function(err,count){
             if(!(err)&&(count!=0)){
@@ -97,6 +107,7 @@ module.exports = function(app){
         if(!asyncErr){
           res.render('list',{
             list:formatList(asyncResult.getList),
+            tags:asyncResult.getAllTag,
             pagination:{
               pageIndex:parseInt(pageIndex),
               pageCount:parseInt(asyncResult.getPageCount)
@@ -109,17 +120,15 @@ module.exports = function(app){
     }
   });
 
+  app.get('/tag/:tag',function(req,res,next){
+
+  });
+
 
   function formatList(docs){
     for(var i=0;i<docs.length;i++){
       docs[i].timeStr = docs[i].time.year+'年'+docs[i].time.month+'月'+docs[i].time.day+'日';
-      var tags = docs[i].tags.split(',');
-      docs[i].tagsArray = [];
-      for(var j=0;j<tags.length;j++){
-        docs[i].tagsArray.push(tags[j]);
-      }
     }
-    //console.log(docs);
     return docs;
   }
 

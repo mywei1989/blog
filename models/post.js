@@ -9,6 +9,20 @@ function Post(name,title,date,tags,post){
   this.post = post;
 }
 
+Post.prototype.getAllTag = function(callback){
+  var that = this;
+  MongoClient.connect(settings.mongoUrl,function(err,db){
+    var collection = db.collection('posts');
+    collection.distinct('tags',function(err,docs){
+      db.close();
+      if(err){
+        return callback&&callback(err);
+      }
+      callback&&callback(null,docs);
+    });
+  });
+};
+
 Post.prototype.save = function(callback){
   var time = {
     date:this.date,

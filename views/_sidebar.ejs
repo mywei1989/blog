@@ -11,21 +11,13 @@
           </div>
           <div class="widget tags">
             <ul class="tag-list">
-              <li class="tag-list-item">
-                <a class="tag-list-link" href="/tag/javascript/">javascript</a>
-              </li>
-              <li class="tag-list-item">
-                <a class="tag-list-link" href="/tag/css/">css</a>
-              </li>
-              <li class="tag-list-item">
-                <a class="tag-list-link" href="/tag/css/">css</a>
-              </li>
-              <li class="tag-list-item">
-                <a class="tag-list-link" href="/tag/css/">css</a>
-              </li>
-              <li class="tag-list-item">
-                <a class="tag-list-link" href="/tag/css/">css</a>
-              </li>
+               <% if(typeof tags != 'undefined'){ %>
+                <% for(var i=0;i<tags.length;i++){ %>
+                  <li class="tag-list-item">
+                    <a class="tag-list-link" href="/tag/<%= tags[i].tag %>/"><%= tags[i].tagName %></a>
+                  </li>
+                <% } %>
+              <% } %>
             </ul>
           </div>
           <div class="widget archives">

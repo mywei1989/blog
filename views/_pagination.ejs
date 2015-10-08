@@ -1,6 +1,6 @@
 <div class="archive-pagination">
   <div class="paginator">
-    <% if(pagination){ %>
+    <% if(typeof pagination != 'undefined'){ %>
       <% if(pagination.pageIndex>1){ %>
         <a class="extend prev" rel="prev" href="/page/<%= pagination.pageIndex-1 %>/">«</a>
       <% } %>

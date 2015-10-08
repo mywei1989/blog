@@ -510,7 +510,7 @@ body.login .bg-bubbles li:nth-child(10){
   line-height: 100%;
 }
 
-.post input,
+.post input[type="text"],
 .post .textarea,
 .post textarea,
 .post select{
@@ -533,7 +533,34 @@ body.login .bg-bubbles li:nth-child(10){
   border-radius: 4px;
 }
 
+/*.post input[type="checkbox"]{
+  display:block;
+}*/
 
+
+
+.post .tags label{
+  position: relative;
+  float:left;
+  margin-left:10px;
+}
+
+
+.post .tags label>input[type="checkbox"]{
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top:50%;
+  margin-top:-8px;
+}
+
+.post .tags label>span{
+  padding-left:16px;
+}
+
+.post .tags>input[type="text"]{
+  width: 100%;
+}
 
 /********post end********/
 

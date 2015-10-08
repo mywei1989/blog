@@ -13,12 +13,26 @@
         <time class="left">
           <input type="text" placeholder="日期(yyyy/MM/dd hh:mm:ss)" name="date" value="2015/10/07 19:15:12"/>
         </time>
-        <ul class="tags left"></ul>
-        <input type="text" class="right" name="tags" value="tag1,tag2,tag3">
+
+        <div class="one-third tags right clearfix">
+          <label>
+            <input type="checkbox" value="newtags" name="tags" />
+            <span>新增</span>
+          </label>
+          <% if(typeof tags != 'undefined'){ %>
+            <% for(var i=0;i<tags.length;i++){ %>
+              <label for="tag_<%= tags[i].tag %>">
+                <input id="tag_<%= tags[i].tag %>" type="checkbox" value="<%= tags[i].tag %>" name="tags" />
+                <span><%= tags[i].tagName %></span>
+              </label>
+            <% } %>
+          <% } %>
+          <input type="text" class="right" name="newtags" value="tag1:标签1,tag2:标签2,tag3:标签3">
+        </div>
 
       </div>
+
       <div class="markdown-body">
-        <!-- <div class="textarea" contenteditable="true" name="post"></div> -->
         <textarea name="post">测试内容#水电费</textarea>
       </div>
       <button type="submit" class="right">发布</button>

@@ -13,9 +13,9 @@
           <time class="left"><%= list[i].timeStr %></time>
           <ul class="tags left"></ul>
           <ul class="tags right">
-            <% for(var j=0;j<list[i].tagsArray.length;j++){ %>
+            <% for(var j=0;j<list[i].tags.length;j++){ %>
               <li>
-                <a href="/"><%= list[i].tagsArray[j] %></a>
+                <a href="/"><%= list[i].tags[j].tagName %></a>
               </li>
             <% } %>
           </ul>
