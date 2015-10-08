@@ -86,7 +86,8 @@ List.prototype.getArchive = function(callback){
       for(var i=0;i<result.length;i++){
         var archiveObj = {};
         archiveObj.year = result[i].value.year;
-        archiveObj.month = commons.formatMonth(result[i].value.month);
+        archiveObj.month = result[i].value.month;
+        archiveObj.monthFormat = commons.formatMonth(result[i].value.month);
         archiveObj.dateCalc = result[i].value.dateCalc;
         archiveObj.count = result[i].value.count;
         archiveArray.push(archiveObj);

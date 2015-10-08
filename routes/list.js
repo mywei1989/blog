@@ -12,9 +12,9 @@ module.exports = function(app){
         settings.pageSize,
         {}
       );
+      var post = new Post();
       async.parallel({
         getAllTag:function(done){
-          var post = new Post();
           post.getAllTag(function(err,docs){
             if(!(err)&&docs){
               done(null,docs);
@@ -23,7 +23,6 @@ module.exports = function(app){
         },
         getArchive:function(done){
           list.getArchive(function(err,archiveArray){
-
             done(null,archiveArray);
           });
         },
@@ -73,13 +72,18 @@ module.exports = function(app){
         settings.pageSize,
         {}
       );
+      var post = new Post();
       async.parallel({
         getAllTag:function(done){
-          var post = new Post();
           post.getAllTag(function(err,docs){
             if(!(err)&&docs){
               done(null,docs);
             }
+          });
+        },
+        getArchive:function(done){
+          list.getArchive(function(err,archiveArray){
+            done(null,archiveArray);
           });
         },
         getPageCount:function(done){
@@ -97,14 +101,12 @@ module.exports = function(app){
               res.render('list');
             }
           });
-        },
-        getArchive:function(done){
-          done(null);
         }
       },function(asyncErr,asyncResult){
         if(!asyncErr){
           res.render('list',{
             list:formatList(asyncResult.getList),
+            archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
               pageIndex:parseInt(pageIndex),
