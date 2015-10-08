@@ -22,12 +22,9 @@ module.exports = function(app){
           });
         },
         getArchive:function(done){
-          list.getArchive(function(err,docs){
-            /*console.log(docs);
-            if(!(err)&&docs){
-              done(null,docs);
-            }*/
-            done(null,docs);
+          list.getArchive(function(err,archiveArray){
+
+            done(null,archiveArray);
           });
         },
         getPageCount:function(done){
@@ -50,6 +47,7 @@ module.exports = function(app){
         if(!asyncErr){
           res.render('list',{
             list:formatList(asyncResult.getList),
+            archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
               pageIndex:1,

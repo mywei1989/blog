@@ -1,4 +1,5 @@
 var settings = require('../settings/settings.js');
+var commons = require('../commons/commons.js');
 var MongoClient = require('./db.js');
 
 function List(pageIndex,pageSize,queryObj){
@@ -49,39 +50,56 @@ List.prototype.getArchive = function(callback){
   MongoClient.connect(settings.mongoUrl,function(err,db){
     var collection = db.collection('posts');
 
-    collection.aggregate([{
-      $group:{
-        _id:{
-          year:{$year:"$time.date"}
-        },
-        count:{$sum:1}
-      }
-    }],function(err,result){
-      db.close();
-      /*console.log('err:'+err);
-      console.log('result:'+result[0]);*/
-      var temp = result[1];
-      for(var i in temp){
-        if(typeof(temp[i])=="function"){
-          temp[i]();
-         }else{
-          console.log(temp[i]);
+    collection.mapReduce(
+      function(){
+        var key = this.time.monthQuery;
+        var value = {
+          count:1
+        };
+        emit(key,value);
+      },
+      function(key,values){
+        var reduceVal = {count:0};
+        for(var i=0;i<values.length;i++){
+          reduceVal.count+=values[i].count;
         }
-      }
-
-      if(err){
-        return callback&&callback(err);
-      }
-      callback&&callback(null,result);
-    });
-
-    /*collection.find(that.query,function(err,count){
-      if(err){
-        return callback&&callback(err);
-      }
-      callback&&callback(null,count);
+        return reduceVal;
+      },
+      {
+        //out:"archiveTemp",
+        out:{inline:1},
+        finalize:function(key,value){
+          //从key中获取信息 进行手工排序
+          var keyInfoArray = key.split('-');
+          var year = keyInfoArray[0];
+          var month = keyInfoArray[1].length==1?'0'+keyInfoArray[1]:keyInfoArray[1];
+          var dateCalc = parseInt(year+month);
+          value.dateCalc = dateCalc;
+          value.year = parseInt(year);
+          value.month = parseInt(keyInfoArray[1]);
+          return value;
+        }
+      },
+      function(err,result){
       db.close();
-    });*/
+      var archiveArray = [];
+      for(var i=0;i<result.length;i++){
+        var archiveObj = {};
+        archiveObj.year = result[i].value.year;
+        archiveObj.month = commons.formatMonth(result[i].value.month);
+        archiveObj.dateCalc = result[i].value.dateCalc;
+        archiveObj.count = result[i].value.count;
+        archiveArray.push(archiveObj);
+      }
+
+      archiveArray = commons.sortObj(archiveArray,'dateCalc','desc');
+
+
+      if(err){
+        return callback&&callback(err);
+      }
+      callback&&callback(null,archiveArray);
+    });
   });
 };
 
