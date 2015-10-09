@@ -15,9 +15,16 @@ var login_routes = require('./routes/login');
 var post_routes = require('./routes/post');
 
 var app = express();
+
+//  区分  /page/2  与  /page/2/ 的区别 并且该行不能在任何中间件之后 否则无效
+app.enable('strict routing');
+//app.set('strict routing',true);   //同上
+//console.log(app.enabled('strict routing'));
+
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs');
 app.use(flash());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -28,11 +35,8 @@ app.use(session({
     maxAge: 172800000 //两天
   }
 }));
-app.use(express.static(path.join(__dirname, '/assets')));
 
-
-
-
+app.use(express.static(path.join(__dirname, '/assets'),{redirect: false}));
 
 list_routes(app);
 article_routes(app);
