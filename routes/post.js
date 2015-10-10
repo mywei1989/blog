@@ -12,6 +12,7 @@ module.exports = function(app){
       user.checkLogin(function(err,usercookieinfo){
         if(usercookieinfo){
           var list = new List({});
+          var post = new Post({});
           async.parallel({
             getAllTag:function(done){
               post.getAllTag(function(err,docs){
