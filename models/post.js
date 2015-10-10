@@ -80,13 +80,7 @@ Post.prototype.getArticle = function(callback){
         return callback&&callback(404);
       }else{
         doc.timeStr = doc.time.year+'年'+doc.time.month+'月'+doc.time.day+'日';
-
-
-
-
         doc.post = marked(doc.post);
-        console.log(marked(doc.post));
-        //console.log(doc.post);
         return callback&&callback(null,doc);
       }
     });

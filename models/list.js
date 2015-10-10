@@ -1,3 +1,9 @@
+var marked = require('marked');
+marked.setOptions({
+  highlight:function(code){
+    return require('highlight.js').highlightAuto(code).value;;
+  }
+});
 var settings = require('../settings/settings.js');
 var commons = require('../commons/commons.js');
 var MongoClient = require('./db.js');
@@ -49,6 +55,7 @@ List.prototype.getList = function(callback){
         }
         for(var i=0;i<docs.length;i++){
           docs[i].timeStr = docs[i].time.year+'年'+docs[i].time.month+'月'+docs[i].time.day+'日';
+          docs[i].post = marked(docs[i].post);
         }
         callback&&callback(null,docs);
     });

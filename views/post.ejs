@@ -33,9 +33,36 @@
       </div>
 
       <div class="markdown-body">
-        <textarea name="post">### asdfk \r
-- 这是
-> 难道这是p?
+        <textarea name="post">
+          # 一级标题
+## 二级标题
+* 无序列表1
+* 无序列表2
+1. 有序列表1
+2. 有序列表2
+> 引用
+![图片](http://url)
+
+*一个星号包裹是斜体*
+**两个星号包裹是粗体**
+***   三个星号是分隔符
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+
+```javascript
+var http = require("http");
+
+var app = http.createServer(function(request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello world!");
+});
+
+app.listen(3000, "localhost");
+```
 
         </textarea>
       </div>
