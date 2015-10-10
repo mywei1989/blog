@@ -4,3 +4,6 @@ http://www.nullcn.com
 
 
 
+## License
+
+  [MIT](LICENSE)
