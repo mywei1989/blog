@@ -1,0 +1,47 @@
+{
+  "name":"nullsblog",
+  "description": "http://www.nullcn.com",
+  "keywords": [
+    "blog",
+    "nodejs",
+    "node.js",
+    "express",
+    "mongodb"
+  ],
+  "author": {
+    "name": "null",
+    "email": "mywei1989@gmail.com",
+    "url": "http://www.nullcn.com"
+  },
+  "homepage": "http://www.nullcn.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mywei1989/blog.git"
+  },
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies":{
+    "express":">=4.0",
+    "async":"*",
+    "body-parser":"*",
+    "connect-flash":"*",
+    "cookie-parser":"*",
+    "debug":"*",
+    "ejs":"*",
+    "express-session":"*",
+    "highlight.js":"*",
+    "marked":"*",
+    "mongodb":">=2.0",
+    "supervisor":"*"
+  },
+  "devDependencies":{
+    "supervisor":"*",
+    "forever":"*"
+  },
+  "scripts":{
+    "start":"supervisor ./bin/www"
+  }
+}
