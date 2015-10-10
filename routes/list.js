@@ -260,6 +260,127 @@ module.exports = function(app){
     }
   });
 
+  app.get('/:year/:month',function(req,res,next){
+    res.redirect(301,'/'+req.params.year+'/'+req.params.month+'/');
+  });
+  app.get('/:year/:month/',function(req,res,next){
+    if(req.sessionID){
+      var list = new List(
+        1,
+        settings.pageSize,
+        {"time.monthQuery":req.params.year+"-"+req.params.month}
+      );
+      var post = new Post();
+      async.parallel({
+        getAllTag:function(done){
+          post.getAllTag(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }
+          });
+        },
+        getArchive:function(done){
+          list.getArchive(function(err,archiveArray){
+            done(null,archiveArray);
+          });
+        },
+        getPageCount:function(done){
+          list.getCount(function(err,count){
+            if(!(err)&&(count!=0)){
+              done(null,Math.ceil(count/settings.pageSize));
+            }
+          });
+        },
+        getList:function(done){
+          list.getList(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }else{
+              res.render('list');
+            }
+          });
+        }
+      },function(asyncErr,asyncResult){
+        if(!asyncErr){
+          res.render('list',{
+            list:formatList(asyncResult.getList),
+            archiveList:asyncResult.getArchive,
+            tags:asyncResult.getAllTag,
+            pagination:{
+              pageIndex:1,
+              pageCount:parseInt(asyncResult.getPageCount)
+            }
+          });
+        }else{
+          res.end();
+        }
+      });
+    }
+  });
+  app.get('/:year/:month/page',function(req,res,next){
+    res.redirect(301,'/'+req.params.year+'/'+req.params.month+'/page/1/');
+  });
+  app.get('/:year/:month/page/:page',function(req,res,next){
+    res.redirect(301,'/'+req.params.year+'/'+req.params.month+'/page/'+req.params.page+'/');
+  });
+  app.get('/:year/:month/page/:page/',function(req,res,next){
+    if(req.sessionID){
+      var pageIndex = req.params.page;
+      var list = new List(
+        pageIndex,
+        settings.pageSize,
+        {"time.monthQuery":req.params.year+"-"+req.params.month}
+      );
+      var post = new Post();
+      async.parallel({
+        getAllTag:function(done){
+          post.getAllTag(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }
+          });
+        },
+        getArchive:function(done){
+          list.getArchive(function(err,archiveArray){
+            done(null,archiveArray);
+          });
+        },
+        getPageCount:function(done){
+          list.getCount(function(err,count){
+            if(!(err)&&(count!=0)){
+              done(null,Math.ceil(count/settings.pageSize));
+            }
+          });
+        },
+        getList:function(done){
+          list.getList(function(err,docs){
+            if(!(err)&&docs){
+              done(null,docs);
+            }else{
+              res.render('list');
+            }
+          });
+        }
+      },function(asyncErr,asyncResult){
+        if(!asyncErr){
+          res.render('list',{
+            list:formatList(asyncResult.getList),
+            archiveList:asyncResult.getArchive,
+            tags:asyncResult.getAllTag,
+            pagination:{
+              pageIndex:parseInt(pageIndex),
+              pageCount:parseInt(asyncResult.getPageCount)
+            }
+          });
+        }else{
+          res.end();
+        }
+      });
+    }
+  });
+
+
+
 
 
 

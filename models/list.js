@@ -27,26 +27,6 @@ List.prototype.getCount = function(callback){
 };
 
 //读取列表
-/*List.prototype.getList = function(callback){
-  var that = this;
-  MongoClient.connect(settings.mongoUrl,function(err,db){
-    var collection = db.collection('posts');
-    var skip = that.pageIndex==1?0:(that.pageIndex-1)*settings.pageSize;
-    collection.find({})
-      .skip(skip)
-      .limit(that.pageSize)
-      .sort({time:-1})
-      .toArray(function(err,docs){
-        if(err){
-          return callback&&callback(err);
-        }
-        callback&&callback(null,docs);
-        db.close();
-    });
-  });
-};*/
-
-//读取某tag列表
 List.prototype.getList = function(callback){
   var that = this;
   MongoClient.connect(settings.mongoUrl,function(err,db){
@@ -68,6 +48,28 @@ List.prototype.getList = function(callback){
     });
   });
 };
+
+/*List.prototype.getListArchive = function(callback){
+  var that = this;
+  MongoClient.connect(settings.mongoUrl,function(err,db){
+    var collection = db.collection('posts');
+    var skip = that.pageIndex==1?0:(that.pageIndex-1)*settings.pageSize;
+    //{"tags":{$elemMatch:{"tag":req.params.tag}}}
+    collection.find({"time.monthQuery":"2014-10"})
+      .skip(skip)
+      .limit(that.pageSize)
+      .sort({time:-1})
+      .toArray(function(err,docs){
+        //console.log(err);
+        //console.log(docs);
+        if(err){
+          return callback&&callback(err);
+        }
+        callback&&callback(null,docs);
+        db.close();
+    });
+  });
+};*/
 
 //读取归档
 List.prototype.getArchive = function(callback){
