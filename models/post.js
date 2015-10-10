@@ -7,6 +7,7 @@ function Post(post){
   this.date = post.date;
   this.tags = post.tags;
   this.post = post.post;
+  this.query = post.queryObj;
 }
 
 /*function Post(name,title,date,tags,post){
@@ -62,17 +63,21 @@ Post.prototype.save = function(callback){
   });
 };
 
-Post.prototype.get = function(){
+Post.prototype.getArticle = function(callback){
   var that = this;
   MongoClient.connect(settings.mongoUrl,function(err,db){
     var collection = db.collection('posts');
-    collection.findOne({},{},function(err,doc){
+    //{"time.year":2015,"time.month":10,"name":"testroute10"}
+    collection.findOne(that.query,function(err,doc){
       db.close();
-      console.log(doc);
       if(err){
         return callback&&callback(err);
+      }else if(doc===null){
+        return callback&&callback(404);
+      }else{
+        doc.timeStr = doc.time.year+'年'+doc.time.month+'月'+doc.time.day+'日';
+        return callback&&callback(null,doc);
       }
-      callback&&callback(null,doc);
     });
   });
 };

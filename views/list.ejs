@@ -6,17 +6,19 @@
       <article>
         <header>
           <h2>
-            <a href="/"><%= list[i].title %></a>
+            <a href="/<%= list[i].time.year %>/<%= list[i].time.month %>/<%= list[i].name %>"><%= list[i].title %></a>
           </h2>
         </header>
         <div class="article-meta clearfix">
           <time class="left"><%= list[i].timeStr %></time>
           <ul class="tags left"></ul>
           <ul class="tags right">
-            <% for(var j=0;j<list[i].tags.length;j++){ %>
-              <li>
-                <a href="/tag/<%= list[i].tags[j].tag %>/"><%= list[i].tags[j].tagName %></a>
-              </li>
+            <% if(typeof list[i].tags != 'undefined'){ %>
+              <% for(var j=0;j<list[i].tags.length;j++){ %>
+                <li>
+                  <a href="/tag/<%= list[i].tags[j].tag %>/"><%= list[i].tags[j].tagName %></a>
+                </li>
+              <% } %>
             <% } %>
           </ul>
         </div>

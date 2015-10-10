@@ -43,11 +43,14 @@ List.prototype.getList = function(callback){
       .limit(that.pageSize)
       .sort({time:-1})
       .toArray(function(err,docs){
+        db.close();
         if(err){
           return callback&&callback(err);
         }
+        for(var i=0;i<docs.length;i++){
+          docs[i].timeStr = docs[i].time.year+'年'+docs[i].time.month+'月'+docs[i].time.day+'日';
+        }
         callback&&callback(null,docs);
-        db.close();
     });
   });
 };

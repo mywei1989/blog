@@ -4,31 +4,24 @@
   <article>
     <header>
       <h2>
-        <a href="/">这是文章标题1</a>
+        <a href="#"><%= article.title %></a>
       </h2>
     </header>
     <div class="article-meta clearfix">
-      <time class="left">2015年9月29日</time>
+      <time class="left"><%= article.timeStr %></time>
       <ul class="tags left"></ul>
       <ul class="tags right">
-        <li>
-          <a href="/">生活记录1</a>
-        </li>
-        <li>
-          <a href="/">生活记录2</a>
-        </li>
+        <% if(typeof article.tags != 'undefined'){ %>
+          <% for(var i=0;i<article.tags.length;i++){ %>
+            <li>
+              <a href="/tag/<%= article.tags[i].tag %>/"><%= article.tags[i].tagName %></a>
+            </li>
+          <% } %>
+        <% } %>
       </ul>
     </div>
     <div class="markdown-body">
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
-      <p>
-        这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话这是一段话
-      </p>
+      <%= article.post %>
     </div>
   </article>
 </div>

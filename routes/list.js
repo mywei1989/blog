@@ -45,7 +45,7 @@ module.exports = function(app){
       },function(asyncErr,asyncResult){
         if(!asyncErr){
           res.render('list',{
-            list:formatList(asyncResult.getList),
+            list:asyncResult.getList,
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
@@ -108,7 +108,7 @@ module.exports = function(app){
       },function(asyncErr,asyncResult){
         if(!asyncErr){
           res.render('list',{
-            list:formatList(asyncResult.getList),
+            list:asyncResult.getList,
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
@@ -177,7 +177,7 @@ module.exports = function(app){
       },function(asyncErr,asyncResult){
         if(!asyncErr){
           res.render('list',{
-            list:formatList(asyncResult.getList),
+            list:asyncResult.getList,
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
@@ -244,7 +244,7 @@ module.exports = function(app){
       },function(asyncErr,asyncResult){
         if(!asyncErr){
           res.render('list',{
-            list:formatList(asyncResult.getList),
+            list:asyncResult.getList,
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
@@ -303,7 +303,7 @@ module.exports = function(app){
       },function(asyncErr,asyncResult){
         if(!asyncErr){
           res.render('list',{
-            list:formatList(asyncResult.getList),
+            list:asyncResult.getList,
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
@@ -364,7 +364,7 @@ module.exports = function(app){
       },function(asyncErr,asyncResult){
         if(!asyncErr){
           res.render('list',{
-            list:formatList(asyncResult.getList),
+            list:asyncResult.getList,
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
@@ -378,17 +378,5 @@ module.exports = function(app){
       });
     }
   });
-
-
-
-
-
-
-  function formatList(docs){
-    for(var i=0;i<docs.length;i++){
-      docs[i].timeStr = docs[i].time.year+'年'+docs[i].time.month+'月'+docs[i].time.day+'日';
-    }
-    return docs;
-  }
 
 };
