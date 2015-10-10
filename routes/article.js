@@ -10,7 +10,6 @@ module.exports = function(app){
       var year = parseInt(req.params.year);
       var month = parseInt(req.params.month);
       if((!year)&&(!month)){
-        //res.end(404);
         res.status(404).end();
         return;
       }
@@ -54,6 +53,4 @@ module.exports = function(app){
       });
     }
   });
-
-
 };

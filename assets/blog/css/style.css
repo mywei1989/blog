@@ -588,4 +588,11 @@ a{
 pre{
   background-color:#1C1C1C;  /*墨*/
   color:#fff;
+  padding:0 5px;
+  border-radius: 5px;
+
+}
+
+code{
+  font-family:Consolas,"Courier New",Courier,FreeMono,monospace
 }

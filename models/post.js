@@ -1,3 +1,10 @@
+var markdown = require('markdown').markdown;
+var marked = require('marked');
+marked.setOptions({
+  highlight:function(code){
+    return require('highlight.js').highlightAuto(code).value;;
+  }
+});
 var settings = require('../settings/settings.js');
 var MongoClient = require('./db.js');
 
@@ -9,14 +16,6 @@ function Post(post){
   this.post = post.post;
   this.query = post.queryObj;
 }
-
-/*function Post(name,title,date,tags,post){
-  this.name = name;
-  this.title = title;
-  this.date = date;
-  this.tags = tags;
-  this.post = post;
-}*/
 
 Post.prototype.getAllTag = function(callback){
   var that = this;
@@ -51,6 +50,11 @@ Post.prototype.save = function(callback){
     tags:this.tags,
     post:this.post
   };
+  /*console.log(this.post);
+  callback&&callback(null);
+  return;*/
+
+
   MongoClient.connect(settings.mongoUrl,function(err,db){
     var collection = db.collection('posts');
     collection.insert(post,function(err){
@@ -76,6 +80,13 @@ Post.prototype.getArticle = function(callback){
         return callback&&callback(404);
       }else{
         doc.timeStr = doc.time.year+'年'+doc.time.month+'月'+doc.time.day+'日';
+
+
+
+
+        doc.post = marked(doc.post);
+        console.log(marked(doc.post));
+        //console.log(doc.post);
         return callback&&callback(null,doc);
       }
     });
