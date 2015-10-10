@@ -8,12 +8,6 @@ var settings = require('../settings/settings.js');
 var commons = require('../commons/commons.js');
 var MongoClient = require('./db.js');
 
-/*function List(pageIndex,pageSize,queryObj){
-  this.pageIndex = pageIndex;
-  this.pageSize = pageSize;
-  this.query = queryObj
-}*/
-
 function List(list){
   this.pageIndex = list.pageIndex;
   this.pageSize = list.pageSize;
@@ -62,27 +56,6 @@ List.prototype.getList = function(callback){
   });
 };
 
-/*List.prototype.getListArchive = function(callback){
-  var that = this;
-  MongoClient.connect(settings.mongoUrl,function(err,db){
-    var collection = db.collection('posts');
-    var skip = that.pageIndex==1?0:(that.pageIndex-1)*settings.pageSize;
-    //{"tags":{$elemMatch:{"tag":req.params.tag}}}
-    collection.find({"time.monthQuery":"2014-10"})
-      .skip(skip)
-      .limit(that.pageSize)
-      .sort({time:-1})
-      .toArray(function(err,docs){
-        //console.log(err);
-        //console.log(docs);
-        if(err){
-          return callback&&callback(err);
-        }
-        callback&&callback(null,docs);
-        db.close();
-    });
-  });
-};*/
 
 //读取归档
 List.prototype.getArchive = function(callback){
@@ -126,7 +99,13 @@ List.prototype.getArchive = function(callback){
       //callback
       function(err,result){
       db.close();
+      if(err){
+        return callback&&callback(err);
+      }
       var archiveArray = [];
+      if(result.length===0){
+        return callback&&callback(null,archiveArray);
+      }
       for(var i=0;i<result.length;i++){
         var archiveObj = {};
         archiveObj.year = result[i].value.year;
@@ -144,7 +123,7 @@ List.prototype.getArchive = function(callback){
       if(err){
         return callback&&callback(err);
       }
-      callback&&callback(null,archiveArray);
+      return callback&&callback(null,archiveArray);
     });
   });
 };

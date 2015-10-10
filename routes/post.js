@@ -1,5 +1,6 @@
 var async = require('async');
 var User = require('../models/user.js');
+var List = require('../models/list.js');
 var Post = require('../models/post.js');
 
 module.exports = function(app){
@@ -10,18 +11,26 @@ module.exports = function(app){
       });
       user.checkLogin(function(err,usercookieinfo){
         if(usercookieinfo){
+          var list = new List({});
           async.parallel({
-          getAllTag:function(done){
-            var post = new Post({});
-            post.getAllTag(function(err,docs){
-              if(!(err)&&docs){
-                done(null,docs);
-              }
-            });
-          },
-          getArchive:function(done){
-            done(null);
-          }
+            getAllTag:function(done){
+              post.getAllTag(function(err,docs){
+                if(!(err)&&docs){
+                  done(null,docs);
+                }else{
+                  done(null);
+                }
+              });
+            },
+            getArchive:function(done){
+              list.getArchive(function(err,archiveArray){
+                if(!(err)&&archiveArray){
+                  done(null,archiveArray);
+                }else{
+                  done(null);
+                }
+              });
+            },
         },function(asyncErr,asyncResult){
           res.render('post',{
             tags:asyncResult.getAllTag

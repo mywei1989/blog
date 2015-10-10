@@ -18,18 +18,26 @@ module.exports = function(app){
           post.getAllTag(function(err,docs){
             if(!(err)&&docs){
               done(null,docs);
+            }else{
+              done(null);
             }
           });
         },
         getArchive:function(done){
           list.getArchive(function(err,archiveArray){
-            done(null,archiveArray);
+            if(!(err)&&archiveArray){
+              done(null,archiveArray);
+            }else{
+              done(null);
+            }
           });
         },
         getPageCount:function(done){
           list.getCount(function(err,count){
             if(!(err)&&(count!=0)){
               done(null,Math.ceil(count/settings.pageSize));
+            }else{
+              done(null);
             }
           });
         },
@@ -38,7 +46,7 @@ module.exports = function(app){
             if(!(err)&&docs){
               done(null,docs);
             }else{
-              res.render('list');
+              done(null);
             }
           });
         }
@@ -81,18 +89,26 @@ module.exports = function(app){
           post.getAllTag(function(err,docs){
             if(!(err)&&docs){
               done(null,docs);
+            }else{
+              done(null);
             }
           });
         },
         getArchive:function(done){
           list.getArchive(function(err,archiveArray){
-            done(null,archiveArray);
+            if(!(err)&&archiveArray){
+              done(null,archiveArray);
+            }else{
+              done(null);
+            }
           });
         },
         getPageCount:function(done){
           list.getCount(function(err,count){
             if(!(err)&&(count!=0)){
               done(null,Math.ceil(count/settings.pageSize));
+            }else{
+              done(null);
             }
           });
         },
@@ -101,7 +117,7 @@ module.exports = function(app){
             if(!(err)&&docs){
               done(null,docs);
             }else{
-              res.render('list');
+              done(null);
             }
           });
         }
@@ -161,7 +177,7 @@ module.exports = function(app){
             if(!(err)&&(count!=0)){
               done(null,Math.ceil(count/settings.pageSize));
             }else{
-              done(err);
+              done(null);
             }
           });
         },
@@ -170,7 +186,7 @@ module.exports = function(app){
             if(!(err)&&docs){
               done(null,docs);
             }else{
-              res.render('list');
+              done(null);
             }
           });
         }
@@ -228,7 +244,7 @@ module.exports = function(app){
             if(!(err)&&(count!=0)){
               done(null,Math.ceil(count/settings.pageSize));
             }else{
-              done(err);
+              done(null);
             }
           });
         },
@@ -237,7 +253,7 @@ module.exports = function(app){
             if(!(err)&&docs){
               done(null,docs);
             }else{
-              res.render('list');
+              done(null);
             }
           });
         }
@@ -276,18 +292,26 @@ module.exports = function(app){
           post.getAllTag(function(err,docs){
             if(!(err)&&docs){
               done(null,docs);
+            }else{
+              done(null);
             }
           });
         },
         getArchive:function(done){
           list.getArchive(function(err,archiveArray){
-            done(null,archiveArray);
+            if(!(err)&&archiveArray){
+              done(null,archiveArray);
+            }else{
+              done(null);
+            }
           });
         },
         getPageCount:function(done){
           list.getCount(function(err,count){
             if(!(err)&&(count!=0)){
               done(null,Math.ceil(count/settings.pageSize));
+            }else{
+              done(null);
             }
           });
         },
@@ -296,7 +320,7 @@ module.exports = function(app){
             if(!(err)&&docs){
               done(null,docs);
             }else{
-              res.render('list');
+              done(null);
             }
           });
         }
@@ -337,18 +361,26 @@ module.exports = function(app){
           post.getAllTag(function(err,docs){
             if(!(err)&&docs){
               done(null,docs);
+            }else{
+              done(null);
             }
           });
         },
         getArchive:function(done){
           list.getArchive(function(err,archiveArray){
-            done(null,archiveArray);
+            if(!(err)&&archiveArray){
+              done(null,archiveArray);
+            }else{
+              done(null);
+            }
           });
         },
         getPageCount:function(done){
           list.getCount(function(err,count){
             if(!(err)&&(count!=0)){
               done(null,Math.ceil(count/settings.pageSize));
+            }else{
+              done(null);
             }
           });
         },
@@ -357,7 +389,7 @@ module.exports = function(app){
             if(!(err)&&docs){
               done(null,docs);
             }else{
-              res.render('list');
+              done(null);
             }
           });
         }

@@ -565,7 +565,7 @@ body.login .bg-bubbles li:nth-child(10){
 /********post end********/
 
 
-
+/******blog theme start*****/
 body{
   background-color:#434343;  /*消炭*/
   color:#000;
@@ -596,3 +596,5 @@ pre{
 code{
   font-family:Consolas,"Courier New",Courier,FreeMono,monospace
 }
+
+/******blog theme end*****/

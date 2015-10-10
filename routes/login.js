@@ -48,7 +48,7 @@ module.exports = function(app){
 
   });
 
-  app.post('/register',function(req,res){
+  /*app.post('/register',function(req,res){
     var loginForm = req.body;
     var userLogin = new User({
       userName: loginForm.userName,
@@ -63,6 +63,6 @@ module.exports = function(app){
     });
 
     res.redirect('/login');
-  });
+  });*/
 
 };

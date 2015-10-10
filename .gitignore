@@ -30,4 +30,5 @@ node_modules
 db
 mongod.bat
 MongoVUE.exe.lnk
+startmongodb.sh
 
