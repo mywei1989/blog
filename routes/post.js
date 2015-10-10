@@ -8,30 +8,28 @@ module.exports = function(app){
       var user = new User({
         sessionID:req.sessionID
       });
-      /*user.checkLogin(function(err,usercookieinfo){
+      user.checkLogin(function(err,usercookieinfo){
         if(usercookieinfo){
-          res.render('post');
+          async.parallel({
+          getAllTag:function(done){
+            var post = new Post({});
+            post.getAllTag(function(err,docs){
+              if(!(err)&&docs){
+                done(null,docs);
+              }
+            });
+          },
+          getArchive:function(done){
+            done(null);
+          }
+        },function(asyncErr,asyncResult){
+          res.render('post',{
+            tags:asyncResult.getAllTag
+          });
+        });
         }else{
           res.redirect('/login');
         }
-      });*/
-
-      async.parallel({
-        getAllTag:function(done){
-          var post = new Post({});
-          post.getAllTag(function(err,docs){
-            if(!(err)&&docs){
-              done(null,docs);
-            }
-          });
-        },
-        getArchive:function(done){
-          done(null);
-        }
-      },function(asyncErr,asyncResult){
-        res.render('post',{
-          tags:asyncResult.getAllTag
-        });
       });
     }
   });

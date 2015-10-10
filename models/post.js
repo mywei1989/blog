@@ -50,10 +50,6 @@ Post.prototype.save = function(callback){
     tags:this.tags,
     post:this.post
   };
-  /*console.log(this.post);
-  callback&&callback(null);
-  return;*/
-
 
   MongoClient.connect(settings.mongoUrl,function(err,db){
     var collection = db.collection('posts');
