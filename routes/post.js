@@ -18,7 +18,7 @@ module.exports = function(app){
 
       async.parallel({
         getAllTag:function(done){
-          var post = new Post();
+          var post = new Post({});
           post.getAllTag(function(err,docs){
             if(!(err)&&docs){
               done(null,docs);
@@ -44,7 +44,7 @@ module.exports = function(app){
       var formData = req.body;
       async.waterfall([
         function(done){
-          var post = new Post();
+          var post = new Post({});
           post.getAllTag(function(err,docs){
             var tags=[];
             if(!(err)&&docs){
@@ -94,13 +94,13 @@ module.exports = function(app){
         },
         function(tags,done){
           var date = new Date(formData.date);
-          var post = new Post(
-            formData.name,
-            formData.title,
-            date,
-            tags,
-            formData.post
-          );
+          var post = new Post({
+            name:formData.name,
+            title:formData.title,
+            date:date,
+            tags:tags,
+            post:formData.post
+          });
           post.save(function(err){
             if(err===null){
               done(null);

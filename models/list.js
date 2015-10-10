@@ -2,11 +2,16 @@ var settings = require('../settings/settings.js');
 var commons = require('../commons/commons.js');
 var MongoClient = require('./db.js');
 
-function List(pageIndex,pageSize,queryObj){
+/*function List(pageIndex,pageSize,queryObj){
   this.pageIndex = pageIndex;
   this.pageSize = pageSize;
-  //this.tag = tag;
   this.query = queryObj
+}*/
+
+function List(list){
+  this.pageIndex = list.pageIndex;
+  this.pageSize = list.pageSize;
+  this.query = list.queryObj;
 }
 
 //读取数据量
@@ -29,17 +34,15 @@ List.prototype.getCount = function(callback){
 //读取列表
 List.prototype.getList = function(callback){
   var that = this;
+
   MongoClient.connect(settings.mongoUrl,function(err,db){
     var collection = db.collection('posts');
     var skip = that.pageIndex==1?0:(that.pageIndex-1)*settings.pageSize;
-    //console.log(that.query);
     collection.find(that.query)
       .skip(skip)
       .limit(that.pageSize)
       .sort({time:-1})
       .toArray(function(err,docs){
-        //console.log(err);
-        //console.log(docs);
         if(err){
           return callback&&callback(err);
         }

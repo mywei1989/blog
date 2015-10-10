@@ -7,12 +7,12 @@ var List = require('../models/list.js');
 module.exports = function(app){
   app.get('/',function(req,res,next){
     if(req.sessionID){
-      var list = new List(
-        1,
-        settings.pageSize,
-        {}
-      );
-      var post = new Post();
+      var list = new List({
+        pageIndex:1,
+        pageSize:settings.pageSize,
+        queryObj:{}
+      });
+      var post = new Post({});
       async.parallel({
         getAllTag:function(done){
           post.getAllTag(function(err,docs){
@@ -70,12 +70,12 @@ module.exports = function(app){
   app.get('/page/:page/',function(req,res,next){
     if(req.sessionID){
       var pageIndex = req.params.page;
-      var list = new List(
-        pageIndex,
-        settings.pageSize,
-        {}
-      );
-      var post = new Post();
+      var list = new List({
+        pageIndex:pageIndex,
+        pageSize:settings.pageSize,
+        queryObj:{}
+      });
+      var post = new Post({});
       async.parallel({
         getAllTag:function(done){
           post.getAllTag(function(err,docs){
@@ -131,12 +131,12 @@ module.exports = function(app){
   });
   app.get('/tag/:tag/',function(req,res,next){
     if(req.sessionID){
-      var list = new List(
-        1,
-        settings.pageSize,
-        {"tags":{$elemMatch:{"tag":req.params.tag}}}
-      );
-      var post = new Post();
+      var list = new List({
+        pageIndex:1,
+        pageSize:settings.pageSize,
+        queryObj:{"tags":{$elemMatch:{"tag":req.params.tag}}}
+      });
+      var post = new Post({});
       async.parallel({
         getAllTag:function(done){
           post.getAllTag(function(err,docs){
@@ -198,12 +198,12 @@ module.exports = function(app){
   app.get('/tag/:tag/page/:page/',function(req,res,next){
     if(req.sessionID){
       var pageIndex = req.params.page;
-      var list = new List(
-        pageIndex,
-        settings.pageSize,
-        {"tags":{$elemMatch:{"tag":req.params.tag}}}
-      );
-      var post = new Post();
+      var list = new List({
+        pageIndex:pageIndex,
+        pageSize:settings.pageSize,
+        queryObj:{"tags":{$elemMatch:{"tag":req.params.tag}}}
+      });
+      var post = new Post({});
       async.parallel({
         getAllTag:function(done){
           post.getAllTag(function(err,docs){
@@ -265,12 +265,12 @@ module.exports = function(app){
   });
   app.get('/:year/:month/',function(req,res,next){
     if(req.sessionID){
-      var list = new List(
-        1,
-        settings.pageSize,
-        {"time.monthQuery":req.params.year+"-"+req.params.month}
-      );
-      var post = new Post();
+      var list = new List({
+        pageIndex:1,
+        pageSize:settings.pageSize,
+        queryObj:{"time.monthQuery":req.params.year+"-"+req.params.month}
+      });
+      var post = new Post({});
       async.parallel({
         getAllTag:function(done){
           post.getAllTag(function(err,docs){
@@ -326,12 +326,12 @@ module.exports = function(app){
   app.get('/:year/:month/page/:page/',function(req,res,next){
     if(req.sessionID){
       var pageIndex = req.params.page;
-      var list = new List(
-        pageIndex,
-        settings.pageSize,
-        {"time.monthQuery":req.params.year+"-"+req.params.month}
-      );
-      var post = new Post();
+      var list = new List({
+        pageIndex:pageIndex,
+        pageSize:settings.pageSize,
+        queryObj:{"time.monthQuery":req.params.year+"-"+req.params.month}
+      });
+      var post = new Post({});
       async.parallel({
         getAllTag:function(done){
           post.getAllTag(function(err,docs){

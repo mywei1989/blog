@@ -1,13 +1,21 @@
 var settings = require('../settings/settings.js');
 var MongoClient = require('./db.js');
 
-function Post(name,title,date,tags,post){
+function Post(post){
+  this.name = post.name;
+  this.title = post.title;
+  this.date = post.date;
+  this.tags = post.tags;
+  this.post = post.post;
+}
+
+/*function Post(name,title,date,tags,post){
   this.name = name;
   this.title = title;
   this.date = date;
   this.tags = tags;
   this.post = post;
-}
+}*/
 
 Post.prototype.getAllTag = function(callback){
   var that = this;
@@ -55,7 +63,18 @@ Post.prototype.save = function(callback){
 };
 
 Post.prototype.get = function(){
-
+  var that = this;
+  MongoClient.connect(settings.mongoUrl,function(err,db){
+    var collection = db.collection('posts');
+    collection.findOne({},{},function(err,doc){
+      db.close();
+      console.log(doc);
+      if(err){
+        return callback&&callback(err);
+      }
+      callback&&callback(null,doc);
+    });
+  });
 };
 
 
