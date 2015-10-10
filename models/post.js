@@ -1,4 +1,3 @@
-var markdown = require('markdown').markdown;
 var marked = require('marked');
 marked.setOptions({
   highlight:function(code){
