@@ -2,42 +2,42 @@
   <div class="paginator">
     <% if(typeof pagination != 'undefined'){ %>
       <% if(pagination.pageIndex>1){ %>
-        <a class="extend prev" rel="prev" href="/page/<%= pagination.pageIndex-1 %>">«</a>
+        <a class="extend prev" rel="prev" href="<%= pagination.prefix %>/page/<%= pagination.pageIndex-1 %>">«</a>
       <% } %>
 
 
 
       <% if(pagination.pageIndex===2){ %>
-        <a class="page-number" href="/">1</a>
+        <a class="page-number" href="<%= pagination.prefix %>/">1</a>
       <% }else if(pagination.pageIndex===3){ %>
         <a class="page-number" href="/">1</a>
-        <a class="page-number" href="page/2/">2</a>
+        <a class="page-number" href="<%= pagination.prefix %>/page/2/">2</a>
       <% }else if(pagination.pageIndex===4){ %>
         <a class="page-number" href="/">1</a>
-        <a class="page-number" href="page/2/">2</a>
-        <a class="page-number" href="page/3/">3</a>
+        <a class="page-number" href="<%= pagination.prefix %>/page/2/">2</a>
+        <a class="page-number" href="<%= pagination.prefix %>/page/3/">3</a>
       <% }else if(pagination.pageIndex>=5){ %>
         <a class="page-number" href="/">1</a>
         <span class="space">…</span>
         <% for(var i=pagination.pageIndex-2;i<pagination.pageIndex;i++){ %>
-          <a class="page-number" href="page/<%= i %>/"><%= i %></a>
+          <a class="page-number" href="<%= pagination.prefix %>/page/<%= i %>/"><%= i %></a>
         <% } %>
       <% } %>
       <span class="page-number current"><%= pagination.pageIndex %></span>
 
       <% if(pagination.pageCount-pagination.pageIndex>=4){ %>
-        <a class="page-number" href="page/<%= pagination.pageIndex+1 %>/"><%= pagination.pageIndex+1 %></a>
-        <a class="page-number" href="page/<%= pagination.pageIndex+2 %>/"><%= pagination.pageIndex+2 %></a>
+        <a class="page-number" href="<%= pagination.prefix %>/page/<%= pagination.pageIndex+1 %>/"><%= pagination.pageIndex+1 %></a>
+        <a class="page-number" href="<%= pagination.prefix %>/page/<%= pagination.pageIndex+2 %>/"><%= pagination.pageIndex+2 %></a>
         <span class="space">…</span>
-        <a class="page-number" href="page/<%= pagination.pageCount %>/"><%= pagination.pageCount %></a>
+        <a class="page-number" href="<%= pagination.prefix %>/page/<%= pagination.pageCount %>/"><%= pagination.pageCount %></a>
       <% }else{ %>
         <% for(var i=pagination.pageIndex+1;i<=pagination.pageCount;i++){ %>
-          <a class="page-number" href="page/<%= i %>/"><%= i %></a>
+          <a class="page-number" href="<%= pagination.prefix %>/page/<%= i %>/"><%= i %></a>
         <% } %>
       <% } %>
 
       <% if(pagination.pageIndex!==pagination.pageCount){ %>
-        <a class="extend next" rel="next" href="page/<%= pagination.pageIndex+1 %>/">»</a>
+        <a class="extend next" rel="next" href="<%= pagination.prefix %>/page/<%= pagination.pageIndex+1 %>/">»</a>
       <% } %>
     <% } %>
   </div>

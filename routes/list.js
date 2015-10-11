@@ -197,6 +197,7 @@ module.exports = function(app){
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
+              prefix:"/tag/"+req.params.tag,
               pageIndex:1,
               pageCount:asyncResult.getPageCount
             }
@@ -264,6 +265,7 @@ module.exports = function(app){
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
+              prefix:"/tag/"+req.params.tag,
               pageIndex:parseInt(pageIndex),
               pageCount:parseInt(asyncResult.getPageCount)
             }
@@ -331,6 +333,7 @@ module.exports = function(app){
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
+              prefix:"/"+req.params.year+"/"+req.params.month,
               pageIndex:1,
               pageCount:parseInt(asyncResult.getPageCount)
             }
@@ -400,6 +403,7 @@ module.exports = function(app){
             archiveList:asyncResult.getArchive,
             tags:asyncResult.getAllTag,
             pagination:{
+              prefix:"/"+req.params.year+"/"+req.params.month,
               pageIndex:parseInt(pageIndex),
               pageCount:parseInt(asyncResult.getPageCount)
             }
