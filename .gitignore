@@ -29,6 +29,9 @@ node_modules
 #DB
 db
 mongod.bat
+
+#release
 MongoVUE.exe.lnk
 startmongodb.sh
-
+robot.txt
+robots.txt
