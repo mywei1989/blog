@@ -4,14 +4,18 @@
   <article>
     <header>
       <h2>
-        <a href="#"><%= article.title %></a>
+        <% if(typeof article != 'undefined' && article.title){ %>
+          <a href="#"><%= article.title %></a>
+        <% } %>
       </h2>
     </header>
     <div class="article-meta clearfix">
-      <time class="left"><%= article.timeStr %></time>
+      <% if(typeof article != 'undefined' && article.timeStr){ %>
+        <time class="left"><%= article.timeStr %></time>
+      <% } %>
       <ul class="tags left"></ul>
       <ul class="tags right">
-        <% if(typeof article.tags != 'undefined'){ %>
+        <% if(typeof article != 'undefined'&& article.tags){ %>
           <% for(var i=0;i<article.tags.length;i++){ %>
             <li>
               <a href="/tag/<%= article.tags[i].tag %>/"><%= article.tags[i].tagName %></a>
@@ -21,7 +25,9 @@
       </ul>
     </div>
     <div class="markdown-body">
-      <%- article.post %>
+      <% if(typeof article != 'undefined'&&article.post){ %>
+        <%- article.post %>
+      <% } %>
     </div>
   </article>
 

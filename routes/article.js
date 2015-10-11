@@ -1,6 +1,7 @@
 var async = require('async');
 var settings = require('../settings/settings.js');
 var Post = require('../models/post.js');
+var Article = require('../models/article.js');
 var List = require('../models/list.js');
 
 module.exports = function(app){
@@ -14,6 +15,9 @@ module.exports = function(app){
         return;
       }
       var post = new Post({
+
+      });
+      var article = new Article({
         queryObj:{"time.year":year,"time.month":month,"name":req.params.name}
       });
       async.parallel({
@@ -30,7 +34,7 @@ module.exports = function(app){
           });
         },
         getArticle:function(done){
-          post.getArticle(function(err,doc){
+          article.get(function(err,doc){
             if(!(err)&&doc){
               done(null,doc);
             }else{
@@ -102,4 +106,7 @@ module.exports = function(app){
       });
     }
   });
+
+
+
 };

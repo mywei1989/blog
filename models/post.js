@@ -62,26 +62,4 @@ Post.prototype.save = function(callback){
   });
 };
 
-Post.prototype.getArticle = function(callback){
-  var that = this;
-  MongoClient.connect(settings.mongoUrl,function(err,db){
-    var collection = db.collection('posts');
-    //{"time.year":2015,"time.month":10,"name":"testroute10"}
-    collection.findOne(that.query,function(err,doc){
-      db.close();
-      if(err){
-        return callback&&callback(err);
-      }else if(doc===null){
-        return callback&&callback(404);
-      }else{
-        doc.timeStr = doc.time.year+'年'+doc.time.month+'月'+doc.time.day+'日';
-        doc.post = marked(doc.post);
-        return callback&&callback(null,doc);
-      }
-    });
-  });
-};
-
-
-
 module.exports = Post;
