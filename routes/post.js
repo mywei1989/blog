@@ -34,7 +34,8 @@ module.exports = function(app){
             },
         },function(asyncErr,asyncResult){
           res.render('post',{
-            tags:asyncResult.getAllTag
+            tags:asyncResult.getAllTag,
+            archiveList:asyncResult.getArchive
           });
         });
         }else{
