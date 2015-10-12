@@ -62,4 +62,37 @@ Post.prototype.save = function(callback){
   });
 };
 
+Post.prototype.update = function(callback){
+  var that = this;
+  var time = {
+    date:this.date,
+    year: this.date.getFullYear(),
+    month:this.date.getMonth()+1,
+    monthQuery: this.date.getFullYear()+'-'+(this.date.getMonth()+1),
+    day:this.date.getDate(),
+    dayQuery: this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate(),
+    minute: this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()+' '
+            +this.date.getHours()+':'+(this.date.getMinutes()<10?'0'+this.date.getMinutes():this.date.getMinutes())
+  };
+
+  var post = {
+    name:this.name,
+    title:this.title,
+    time:time,
+    tags:this.tags,
+    post:this.post
+  };
+
+  MongoClient.connect(settings.mongoUrl,function(err,db){
+    var collection = db.collection('posts');
+    collection.findOneAndUpdate(that.query,post,{},function(err){
+      db.close();
+      if(err){
+        return callback&&callback(err);
+      }
+      callback&&callback(null);
+    });
+  });
+};
+
 module.exports = Post;

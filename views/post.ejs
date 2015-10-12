@@ -22,7 +22,9 @@
           <% if(typeof tags != 'undefined'){ %>
             <% for(var i=0;i<tags.length;i++){ %>
               <label for="tag_<%= tags[i].tag %>">
-                <input id="tag_<%= tags[i].tag %>" type="checkbox" value="<%= tags[i].tag %>" name="tags" />
+                <input id="tag_<%= tags[i].tag %>" type="checkbox" value="<%= tags[i].tag %>" name="tags"
+                <% if(typeof tags[i].checked!='undefined'){ %><%= tags[i].checked %><% }else{ %><% } %>
+                 />
                 <span><%= tags[i].tagName %></span>
               </label>
             <% } %>
