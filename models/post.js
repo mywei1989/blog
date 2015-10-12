@@ -1,5 +1,6 @@
 var marked = require('marked');
 marked.setOptions({
+  breaks: true,
   highlight:function(code){
     return require('highlight.js').highlightAuto(code).value;;
   }
