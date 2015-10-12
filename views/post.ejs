@@ -5,13 +5,13 @@
     <form method="post">
       <header>
         <h2>
-          <input type="text" placeholder="中文标题" name="title" value="测试标题"/>
-          <input type="text" placeholder="路由地址" name="name" value="testroute"/>
+          <input type="text" placeholder="中文标题" name="title" value="<% if(typeof article!='undefined'){ %><%=article.title %><% }else{ %><% } %>"/>
+          <input type="text" placeholder="路由地址" name="name" value="<% if(typeof article!='undefined'){ %><%=article.name %><% }else{ %><% } %>"/>
         </h2>
       </header>
       <div class="article-meta clearfix">
         <time class="left">
-          <input type="text" placeholder="日期(yyyy/MM/dd hh:mm:ss)" name="date" value="2015/10/07 19:15:12"/>
+          <input type="text" placeholder="日期(yyyy/MM/dd hh:mm:ss)" name="date" value="<% if(typeof article!='undefined'){ %><%=article.time.minute %><% }else{ %><% } %>"/>
         </time>
 
         <div class="one-third tags right clearfix">
@@ -34,35 +34,12 @@
 
       <div class="markdown-body">
         <textarea name="post">
-          # 一级标题
-## 二级标题
-* 无序列表1
-* 无序列表2
-1. 有序列表1
-2. 有序列表2
-> 引用
-![图片](http://url)
+          <% if(typeof article!='undefined'){ %>
+            <%=article.post %>
+          <% }else{ %>
 
-*一个星号包裹是斜体*
-**两个星号包裹是粗体**
-***   三个星号是分隔符
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+          <% } %>
 
-
-```javascript
-var http = require("http");
-
-var app = http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("Hello world!");
-});
-
-app.listen(3000, "localhost");
-```
 
         </textarea>
       </div>

@@ -13,6 +13,7 @@ var list_routes = require('./routes/list');
 var article_routes = require('./routes/article');
 var login_routes = require('./routes/login');
 var post_routes = require('./routes/post');
+var info_routes = require('./routes/info');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, '/assets'),{redirect: false}));
 
+info_routes(app);
 list_routes(app);
 article_routes(app);
 login_routes(app);

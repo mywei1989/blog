@@ -34,7 +34,7 @@ module.exports = function(app){
           userLogin.saveCookie(function(result){
             if(result){
               console.log('登录成功');
-              res.redirect('/post');
+              res.redirect('/about/edit');
             }else{
 
             }
