@@ -33,15 +33,7 @@
       </div>
 
       <div class="markdown-body">
-        <textarea name="post">
-          <% if(typeof article!='undefined'){ %>
-            <%=article.post %>
-          <% }else{ %>
-
-          <% } %>
-
-
-        </textarea>
+        <textarea name="post"><%if(typeof article!='undefined'){%><%=article.post %><%}else{%><%}%></textarea>
       </div>
       <button type="submit" class="right">发布</button>
     </form>
