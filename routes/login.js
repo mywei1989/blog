@@ -1,5 +1,4 @@
 var settings = require('../settings/settings.js');
-/*var MongoClient = require('../models/db');*/
 var User = require('../models/user.js');
 
 module.exports = function(app){
@@ -36,7 +35,8 @@ module.exports = function(app){
               console.log('登录成功');
               res.redirect('/');
             }else{
-
+              console.log('登录失败');
+              res.redirect('/login');
             }
           });
         }else{

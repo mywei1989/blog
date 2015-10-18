@@ -116,11 +116,8 @@ List.prototype.getArchive = function(callback){
         archiveObj.count = result[i].value.count;
         archiveArray.push(archiveObj);
       }
-
       //对archive结果集进行排序
       archiveArray = commons.sortObj(archiveArray,'dateCalc','desc');
-
-
       if(err){
         return callback&&callback(err);
       }
