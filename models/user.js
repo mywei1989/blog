@@ -17,6 +17,7 @@ User.prototype.login = function(callback){
     userPassword:this.userPassword
   };
   MongoClient.connect(settings.mongoUrl,function(err,db){
+    if(!err){
       var collection = db.collection('users');
       collection.findOne({userName:user.userName,userPassword:user.userPassword},function(err,result){
         if((!err)&&result){
@@ -26,6 +27,9 @@ User.prototype.login = function(callback){
         }
         db.close();
       });
+    }else{
+      return callback&&callback(err);
+    }
   });
 };
 
@@ -34,17 +38,21 @@ User.prototype.saveCookie = function(callback){
     sessionID:this.sessionID
   };
   MongoClient.connect(settings.mongoUrl,function(err,db){
-    var collection = db.collection('usercookie');
-    collection.insert({
-      sessionID:user.sessionID
-    },function(err,result){
-      if((!err)&&result){
-        callback&&callback(true);
-      }else{
-        callback&&callback(false);
-      }
-      db.close();
-    });
+    if(!err){
+      var collection = db.collection('usercookie');
+      collection.insert({
+        sessionID:user.sessionID
+      },function(err,result){
+        if((!err)&&result){
+          callback&&callback(true);
+        }else{
+          callback&&callback(false);
+        }
+        db.close();
+      });
+    }else{
+      return callback&&callback(err);
+    }
   });
 };
 
@@ -55,6 +63,7 @@ User.prototype.checkLogin = function(callback){
   };
 
   MongoClient.connect(settings.mongoUrl,function(err,db){
+    if(!err){
       var collection = db.collection('usercookie');
       collection.findOne({sessionID:user.sessionID},function(err,usercookieinfo){
         db.close();
@@ -64,6 +73,9 @@ User.prototype.checkLogin = function(callback){
           callback&&callback(err);
         }
       });
+    }else{
+      return callback&&callback(err);
+    }
   });
 };
 
@@ -74,6 +86,7 @@ User.prototype.register = function(callback){
   };
 
   MongoClient.connect(settings.mongoUrl,function(err,db){
+    if(!err){
       var collection = db.collection('users');
       collection.insert({
         userName:user.userName,
@@ -81,7 +94,11 @@ User.prototype.register = function(callback){
       },function(err,result){
         db.close();
       });
-    });
+    }else{
+      return callback&&callback(err);
+    }
+
+  });
 };
 
 module.exports = User;

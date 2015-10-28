@@ -20,14 +20,18 @@ function Post(post){
 Post.prototype.getAllTag = function(callback){
   var that = this;
   MongoClient.connect(settings.mongoUrl,function(err,db){
-    var collection = db.collection('posts');
-    collection.distinct('tags',function(err,docs){
-      db.close();
-      if(err){
-        return callback&&callback(err);
-      }
-      callback&&callback(null,docs);
-    });
+    if(!err){
+      var collection = db.collection('posts');
+      collection.distinct('tags',function(err,docs){
+        db.close();
+        if(err){
+          return callback&&callback(err);
+        }
+        callback&&callback(null,docs);
+      });
+    }else{
+      return callback&&callback(err);
+    }
   });
 };
 
@@ -52,14 +56,18 @@ Post.prototype.save = function(callback){
   };
 
   MongoClient.connect(settings.mongoUrl,function(err,db){
-    var collection = db.collection('posts');
-    collection.insert(post,function(err){
-      db.close();
-      if(err){
-        return callback&&callback(err);
-      }
-      callback&&callback(null);
-    });
+    if(!err){
+      var collection = db.collection('posts');
+      collection.insert(post,function(err){
+        db.close();
+        if(err){
+          return callback&&callback(err);
+        }
+        callback&&callback(null);
+      });
+    }else{
+      return callback&&callback(err);
+    }
   });
 };
 
@@ -85,14 +93,18 @@ Post.prototype.update = function(callback){
   };
 
   MongoClient.connect(settings.mongoUrl,function(err,db){
-    var collection = db.collection('posts');
-    collection.findOneAndUpdate(that.query,post,{},function(err){
-      db.close();
-      if(err){
-        return callback&&callback(err);
-      }
-      callback&&callback(null);
-    });
+    if(!err){
+      var collection = db.collection('posts');
+      collection.findOneAndUpdate(that.query,post,{},function(err){
+        db.close();
+        if(err){
+          return callback&&callback(err);
+        }
+        callback&&callback(null);
+      });
+    }else{
+      return callback&&callback(err);
+    }
   });
 };
 
