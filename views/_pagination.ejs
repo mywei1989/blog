@@ -10,7 +10,7 @@
       <% if(pagination.pageIndex===2){ %>
         <a class="page-number" href="<%= pagination.prefix %>/">1</a>
       <% }else if(pagination.pageIndex===3){ %>
-        <a class="page-number" href="/">1</a>
+        <a class="page-number" href="<%= pagination.prefix %>/">1</a>
         <a class="page-number" href="<%= pagination.prefix %>/page/2/">2</a>
       <% }else if(pagination.pageIndex===4){ %>
         <a class="page-number" href="/">1</a>
