@@ -9,7 +9,8 @@ ol,pre,ul {
 
 
 body{
-  font-family: Georgia,'Source Han Sans CN','Xin Gothic','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  /*Georgia,'Source Han Sans CN','Xin Gothic','Hiragino Sans GB','Microsoft YaHei',sans-serif*/
   background: #F4F4F4;
   font-size: 16px;
   font-weight: 400;
@@ -51,7 +52,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .markdown-body,body {
-  font-family: Georgia,'Source Han Sans CN','Xin Gothic','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 .markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6,body h1,body h2,body h3,body h4,body h5,body h6 {
@@ -162,8 +163,12 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .page-header{
-  margin:40px 0 20px;
+  margin:40px 0 10px;
   padding-bottom:9px;
+  
+}
+.page-header>div{
+  margin:0 10px;
   border-bottom:1px solid #eee;
 }
 
@@ -181,7 +186,6 @@ h1,h2,h3,h4,h5,h6 {
 
 
 .navigation{
-  border-radius: 4px;
   border: 1px solid #E7E7E7;
   margin: 10px
 }
@@ -215,7 +219,6 @@ h1,h2,h3,h4,h5,h6 {
 
 .archive-title,article {
   /*background-color: #fff;*/
-  border-radius: 4px;
   border: 1px solid #E7E7E7;
   margin: 10px 10px 20px;
   padding: 15px 20px;
@@ -256,7 +259,6 @@ article .markdown-body img{
 
 
 .archive-pagination {
-  border-radius: 4px;
   border: 1px solid #E7E7E7;
   margin: 10px 10px 20px;
   padding: 15px 20px;
@@ -276,7 +278,6 @@ article .markdown-body img{
 }
 
 .block-sidebar .widget {
-  border-radius: 4px;
   border: 1px solid #E7E7E7;
   margin: 10px 10px 20px;
   padding: 10px 15px;
@@ -520,7 +521,6 @@ body.login .bg-bubbles li:nth-child(10){
 .post textarea,
 .post select{
   border:1px solid #E7E7E7;
-  border-radius: 4px;
 }
 
 .post .textarea,
@@ -535,7 +535,6 @@ body.login .bg-bubbles li:nth-child(10){
 .post button{
   width: 250px;
   height:50px;
-  border-radius: 4px;
 }
 
 /*.post input[type="checkbox"]{
@@ -587,14 +586,14 @@ article,
 
 .navigation a,
 a{
-  color:#A5DEE4 !important;  /*瓶覗*/
+  /*color:#A5DEE4 !important;*/  /*瓶覗*/
+  color:#F1F5F2 !important;
 }
 
 pre{
   background-color:#1C1C1C;  /*墨*/
   color:#fff;
   padding:10px 15px;
-  border-radius: 5px;
 
 }
 

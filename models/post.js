@@ -60,6 +60,7 @@ Post.prototype.save = function(callback){
       var collection = db.collection('posts');
       collection.insert(post,function(err){
         db.close();
+        console.log(err);
         if(err){
           return callback&&callback(err);
         }

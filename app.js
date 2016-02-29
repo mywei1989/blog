@@ -39,11 +39,12 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, '/assets'),{redirect: false}));
 
-info_routes(app);
+
 list_routes(app);
 article_routes(app);
 login_routes(app);
 post_routes(app);
+info_routes(app);
 
 
 module.exports = app;
