@@ -78,8 +78,7 @@ module.exports = function(app){
           var article = new Article({
             queryObj:{"time.year":year,"time.month":month,"name":req.params.name}
           });
-
-          async.auto({
+          async.parallel({
             getAllTag:function(done){
               post.getAllTag(function(err,docs){
                 if(!(err)&&docs){
@@ -101,10 +100,11 @@ module.exports = function(app){
                   done(null,doc);
                 }
               });
-            },
-            setChooseTags:['getAllTag','getArticle',function(done,results){
-              var allTags = results.getAllTag;
-              var articleTags = results.getArticle.tags;
+            }
+          },function(asyncErr,asyncResult){
+            if(!asyncErr){
+              var allTags = asyncResult.getAllTag;
+              var articleTags = asyncResult.getArticle.tags;
               for(var i=0;i<allTags.length;i++){
                 for(var j=0;j<articleTags.length;j++){
                   if(allTags[i].tag===articleTags[j].tag){
@@ -113,14 +113,10 @@ module.exports = function(app){
                   }
                 }
               }
-              done(null,allTags);
-            }]
-          },function(asyncErr,asyncResult){
-            if(!asyncErr){
               res.render('post',{
                 article:asyncResult.getArticle,
                 archiveList:asyncResult.getArchive,
-                tags:asyncResult.setChooseTags
+                tags:allTags
               });
             }else{
               //404
